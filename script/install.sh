@@ -128,6 +128,7 @@ case $(uname -s) in
     Darwin) OS=osx;;
     Linux) OS=linux;;
     FreeBSD) OS=freebsd;;
+    MSYS*|MINGW*|CYGWIN*) OS=windows;;
     *)
         fatal "Unsupported OS $(uname -s)"
         ;;
@@ -510,7 +511,7 @@ install_compiler() {
             fi
         fi
 
-        if [[ $ver > "2.068.0z" ]]; then
+        if [[ $ver > "2.068.0z" ]] && [ $OS != "windows" ]; then
             local arch="tar.xz"
         else
             local arch="zip"
